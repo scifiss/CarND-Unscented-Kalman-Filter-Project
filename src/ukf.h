@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <math.h>
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
@@ -67,6 +68,8 @@ public:
   ///* Sigma point spreading parameter
   double lambda_;
 
+  ///* previous timestamp
+  long previous_timestamp_;
 
   /**
    * Constructor
@@ -102,6 +105,10 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+  /**
+  Add two noise values to the mean and covariance, and return augmented sigma points
+  */
+  MatrixXd GenerateSigmaPoints();
 };
 
 #endif /* UKF_H */
